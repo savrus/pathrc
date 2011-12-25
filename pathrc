@@ -1,0 +1,34 @@
+# optional installation havs structure like /usr
+# One or more possible optional installations can be specified and existing
+# subdirectories will be added to corresponding environment variables such
+# as PATH and LD_LIBRARY_PATH.
+#
+# By default check for installations in ~/usr directory.
+for USER_PREFIX in ~/usr ; do
+    if [ -d ${USER_PREFIX}/bin ] ; then
+        PATH=${USER_PREFIX}/bin${PATH:+:$PATH}
+        export PATH
+    fi
+    if [ -d ${USER_PREFIX}/sbin ] ; then
+        PATH=${USER_PREFIX}/sbin${PATH:+:$PATH}
+        export PATH
+    fi
+    if [ -d ${USER_PREFIX}/include ] ; then
+        C_INCLUDE_PATH=${USER_PREFIX}/include${C_INCLUDE_PATH:+:$C_INCLUDE_PATH}
+        export C_INCLUDE_PATH
+        CPATH=${USER_PREFIX}/include${CPATH:+:$CPATH}
+        export CPATH
+    fi
+    for l in lib lib64; do
+        if [ -d ${USER_PREFIX}/${l} ] ; then
+            LIBRARY_PATH=${USER_PREFIX}/${l}${LIBRARY_PATH:+:$LIBRARY_PATH}
+            export LIBRARY_PATH
+            LD_LIBRARY_PATH=${USER_PREFIX}/${l}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+            export LD_LIBRARY_PATH
+        fi
+    done
+    if [ -d ${USER_PREFIX}/man ] ; then
+        MANPATH=${USER_PREFIX}/man:${MANPATH}
+        export MANPATH
+    fi
+done

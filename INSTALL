@@ -1,0 +1,5 @@
+Put pathrc file in ~/.patrch and add the following lines to your ~/.bashrc:
+
+if [ -f ~/.pathrc ]; then
+    . ~/.pathrc
+fi
