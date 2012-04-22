@@ -16,6 +16,8 @@ for USER_PREFIX in ~/usr ; do
     if [ -d ${USER_PREFIX}/include ] ; then
         C_INCLUDE_PATH=${USER_PREFIX}/include${C_INCLUDE_PATH:+:$C_INCLUDE_PATH}
         export C_INCLUDE_PATH
+        CPLUS_INCLUDE_PATH=${USER_PREFIX}/include${CPLUS_INCLUDE_PATH:+:$CPLUS_INCLUDE_PATH}
+        export CPLUS_INCLUDE_PATH
         CPATH=${USER_PREFIX}/include${CPATH:+:$CPATH}
         export CPATH
     fi
