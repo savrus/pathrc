@@ -29,8 +29,10 @@ for USER_PREFIX in ~/usr ; do
             export LD_LIBRARY_PATH
         fi
     done
-    if [ -d ${USER_PREFIX}/man ] ; then
-        MANPATH=${USER_PREFIX}/man:${MANPATH}
-        export MANPATH
-    fi
+    for m in local/share share; do
+        if [ -d ${USER_PREFIX}/${m}/man ] ; then
+            MANPATH=${USER_PREFIX}/${m}/man:${MANPATH}
+            export MANPATH
+        fi
+    done
 done
